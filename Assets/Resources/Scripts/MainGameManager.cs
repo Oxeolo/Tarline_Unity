@@ -46,8 +46,10 @@ public class MainGameManager : MonoBehaviour {
 
 	public SaveManager save_manager;
 
+	AudioClip audiotemp = new AudioClip ();
 	public static int score;
 	public static int HighScore = 5;
+
 	// Use this for initialization
 	void Start () {
 		//save_manager = new SaveManager();
@@ -127,6 +129,11 @@ public class MainGameManager : MonoBehaviour {
 		starting_reference = Camera.main.transform.position.x - player.transform.position.x;
 		AddLineSegments(false);
 		current_game_state = game_state.PreStart;
+
+
+		//Car's start up sound -Tyler
+		AudioClip temp = AudioManager.Start_Sound;
+		AudioManager.Play_Audio (temp);	
 
 	}
 
@@ -249,6 +256,10 @@ public class MainGameManager : MonoBehaviour {
 			SaveManager.Save();
 			//scoreReadout.GetComponent<TextMesh>().color = colors["Gold"];
 		}
+		//Destruction sound - Tyler
+		AudioClip audiotemp = AudioManager.Destruction_Sound;
+			AudioManager.Play_Audio (audiotemp);
+		//Jays shit is below
 		current_game_state = game_state.GameOver;
 		player.GetComponent<Rigidbody2D> ().velocity = new Vector3 (0f, 0f, 0f);
 		line_number = 0;
@@ -275,3 +286,4 @@ public class MainGameManager : MonoBehaviour {
 	}
 	
 }
+//Jay+Clara forever
